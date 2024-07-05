@@ -14,8 +14,8 @@ export class HomeComponent {
     console.log("Add Book");
     this.router.navigate(['addBooks']);
   }
+  
   openViewBooks(){
     console.log("View Books");
-    
   }
 }

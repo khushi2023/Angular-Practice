@@ -1,1 +1,7 @@
-<p>book-list works!</p>
+<ag-grid-angular
+class="ag-theme-quartz"
+style="height: 500px; width: 100%;"
+	[rowData]="rowData"
+	[columnDefs]="columnDefs"
+	(gridReady)="OnGridReady($event)">
+</ag-grid-angular>
