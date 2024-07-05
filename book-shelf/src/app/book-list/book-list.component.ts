@@ -59,7 +59,7 @@ export class BookListComponent implements OnInit {
   onCellClicked(event: any): void {
     if (event.colDef.field === 'action') {
       this.id = event.data.id;
-      this.router.navigate(['bookDetail', this.id]);
+      this.router.navigate(['bookDetail']);
     }
   }
   OnGridReady(params: GridReadyEvent) {

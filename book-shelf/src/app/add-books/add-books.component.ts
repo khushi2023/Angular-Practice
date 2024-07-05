@@ -2,12 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { BooksService } from '../services/books.service';
-
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-add-books',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './add-books.component.html',
   styleUrl: './add-books.component.css'
 })
@@ -18,8 +18,8 @@ export class AddBooksComponent {
     name: ['', Validators.required],
     author: ['', Validators.required],
     description: ['', Validators.required],
-    price: ['', Validators.required],
-    quantity: ['',Validators.required]
+    price: [null, [Validators.required,Validators.min(1)]],
+    quantity: ['',[Validators.required,Validators.min(1)]],
   });              
 
   //on submiting

@@ -9,12 +9,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './book-details.component.css'
 })
 export class BookDetailsComponent implements OnInit {
-  id:any;
+  // id:any;
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('bookId');
-    console.log(this.id);
+    // this.id = this.activatedRoute.snapshot.paramMap.get('bookId');
+    // console.log(this.id);
     
   }
   

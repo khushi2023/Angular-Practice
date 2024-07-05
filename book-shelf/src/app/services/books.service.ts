@@ -28,11 +28,5 @@ export class BooksService {
   addBookDetails(){
     const data = localStorage.getItem('bookData');
     return JSON.parse(data || '[]');
-    // if(data){
-    //   return data;
-    // }
-    // else{
-    //   return [];
-    // }
   }
 }

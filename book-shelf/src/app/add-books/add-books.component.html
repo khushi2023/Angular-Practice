@@ -3,28 +3,43 @@
 </div>
 <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
     <div class="form-field">
-        <label for="name">Name</label>
+        <label for="name" >Name <span style="color: red;">*</span></label>
         <input type="text" formControlName="name">
+        <div class="error" *ngIf="bookForm.get('name')?.invalid && bookForm.get('name')?.touched" style="color: red;">
+            Name is required
+        </div>
     </div>
 
     <div class="form-field">
-        <label for="author">Author</label>
+        <label for="author">Author  <span style="color: red;">*</span></label>
         <input type="text" formControlName="author">
+        <div class="error" *ngIf="bookForm.get('author')?.invalid && bookForm.get('author')?.touched" style="color: red;">
+            Author is required
+        </div>
     </div>
 
     <div class="form-field">
-        <label for="description">Description</label>
+        <label for="description">Description  <span style="color: red;">*</span></label>
         <input type="text" formControlName="description">
+        <div class="error" *ngIf="bookForm.get('description')?.invalid && bookForm.get('description')?.touched" style="color: red;">
+            Description is required
+        </div>
     </div>
 
     <div class="form-field">
-        <label for="price">Price</label>
-        <input type="text" formControlName="price">
+        <label for="price">Price  <span style="color: red;">*</span></label>
+        <input type="number" formControlName="price" min="1">
+        <div class="error" *ngIf="bookForm.get('price')?.invalid && bookForm.get('price')?.touched" style="color: red;">
+            Please enter price of minimum 1
+        </div>
     </div>
 
     <div class="form-field">
-        <label for="quantity">Quantity</label>
-        <input type="text" formControlName="quantity">
+        <label for="quantity">Quantity  <span style="color: red;">*</span></label>
+        <input type="number" formControlName="quantity" min="1">
+        <div class="error" *ngIf="bookForm.get('quantity')?.invalid && bookForm.get('quantity')?.touched" style="color: red;">
+            Please enter quantity of minimum 1
+        </div>
     </div>
 
     <button type="submit" class="btn" [disabled]="!bookForm.valid">Submit</button>
