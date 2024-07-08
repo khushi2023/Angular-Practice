@@ -25,12 +25,21 @@ export class AddBooksComponent {
   //on submiting
   onSubmit():void {
     console.log(this.bookForm.value);
-    this.bookService.getBookDetails(this.bookForm.value).then(()=>{
+    this.bookService.addBookDetails(this.bookForm.value).subscribe((res)=>{
+      // this.bookAdded.emit();
+      console.log(res);
+      
       this.toastr.success('Book added successfully');
+    },(err)=>{
+      console.log(err);
     })
-    .catch((err)=>{
-      this.toastr.error(err);
-    });
+    // this.bookService.addBookDetails(this.bookForm.value).subscribe(()=>{
+    //   this.toastr.success('Book added successfully');
+    // },(err)=>{
+    //   this.toastr.error(err);
+    //   console.log(err);
+    // }
+  // );
     this.router.navigate(['viewBooks']);
   }
 }

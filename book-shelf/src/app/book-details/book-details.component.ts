@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,13 +9,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './book-details.component.css'
 })
 export class BookDetailsComponent implements OnInit {
-  // id:any;
+  book:any;
   constructor(private activatedRoute: ActivatedRoute) { }
-
   ngOnInit(): void {
     // this.id = this.activatedRoute.snapshot.paramMap.get('bookId');
-    // console.log(this.id);
-    
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['book']) {
+        this.book = JSON.parse(params['book']);
+        console.log(this.book); // Here you have the entire book object
+      }
+    }) 
   }
-  
 }

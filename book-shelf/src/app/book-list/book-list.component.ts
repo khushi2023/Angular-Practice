@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { AgGridAngular} from 'ag-grid-angular';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
@@ -17,33 +17,22 @@ import { Router } from '@angular/router';
 })
 export class BookListComponent implements OnInit {
   rowData: any[] = [];
-  // firestore: Firestore = inject(Firestore);
   constructor(private router: Router,private bookService: BooksService ) { 
   }
   id: any;
   public data: any;
-  ngOnInit(): void { 
-    this.rowData = this.bookService.addBookDetails().map((book:any,index:any) => ({
-      id: index + 1,
-      name: book.name,
-      author: book.author,
-      description: book.description,
-      price: book.price,
-      quantity: book.quantity,
-      action: 'edit'
-    }));
-    // console.log(data);
-
-      // this.rowData=[
-      //   {
-      //     _id: 1,
-      //     name: this.data.name,
-      //     author: this.data.author,
-      //     description: this.data.description,
-      //     price: this.data.price,
-      //     quantity: this.data.quantity
-      //   }
-      // ]
+  ngOnInit(): void {
+    this.bookService.getBookDetails().subscribe((data: any) => {
+      this.rowData = data.map((book: any, index: any) => ({
+        id: index + 1,
+        name: book.name,
+        author: book.author,
+        description: book.description,
+        price: book.price,
+        quantity: book.quantity,
+        action: book._id
+      }))
+    }) 
   }
 
   columnDefs: ColDef[] = [
@@ -53,14 +42,15 @@ export class BookListComponent implements OnInit {
     { headerName: 'desc', field: 'description' },
     { headerName: 'Price', field: 'price' },
     { headerName: 'Quantity', field: 'quantity' },
-    { headerName: 'Action', field: 'action', cellRenderer: 'BookDetailsComponent' ,onCellClicked: this.onCellClicked.bind(this)},
+    { headerName: 'Action', field: 'action', cellRenderer: (params:any)=>{
+      return `<button type="button" class="btn btn-primary">View</button>`
+    },onCellClicked:this.openBookDetails.bind(this)},
   ];
-
-  onCellClicked(event: any): void {
-    if (event.colDef.field === 'action') {
-      this.id = event.data.id;
-      this.router.navigate(['bookDetail']);
-    }
+  openBookDetails(params:any) {
+    console.log(params.data)
+    const book = params.data;
+    const queryParams = { book: JSON.stringify(book) };
+    this.router.navigate(['bookDetail'], { queryParams:  queryParams });
   }
   OnGridReady(params: GridReadyEvent) {
 		this.gridApi = params.api;

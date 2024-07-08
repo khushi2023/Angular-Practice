@@ -17,5 +17,6 @@ export class HomeComponent {
   
   openViewBooks(){
     console.log("View Books");
+    this.router.navigate(['viewBooks']);
   }
 }
