@@ -8,7 +8,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class BooksService {
   private url='http://localhost:5000/'
   constructor(private http: HttpClient) { }
-  bookData:any[]=[]
+  bookData:any;
   // private bookData = [
   //   { id: 1, name: 'Book 1', author: 'Author 1', description: 'Description 1', price: 25.99, quantity: 10 },
   //   { id: 2, name: 'Book 2', author: 'Author 2', description: 'Description 2', price: 19.99, quantity: 15 },
@@ -16,7 +16,7 @@ export class BooksService {
   //   { id: 4, name: 'Book 4', author: 'Author 4', description: 'Description 4', price: 32.99, quantity: 12 },
   // ];
   addBookDetails(obj: any): Observable<any>{
-    return this.http.post(`${this.url}addBooks`, obj).pipe(
+    return this.http.post(`${this.url}addBook`, obj).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
         return throwError(()=> error);
@@ -26,13 +26,27 @@ export class BooksService {
   
 
   getBookDetails():Observable<void>{
-    return this.http.get<void>(`${this.url}getBooks`).pipe(
+    return this.http.get<void>(`${this.url}getAllBooks`).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
         return throwError(()=> error);
       })
     )
   }
-
-  
+  getParticularBook(name:any):Observable<any>{
+    return this.http.get<any>(`${this.url}getBook`,name).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        return throwError(()=> error);
+      })      
+    )
+  }
+  setObj(obj:any){
+    this.bookData = obj;
+    console.log(this.bookData);
+  }
+  getObj(){
+    console.log(this.bookData);
+    return this.bookData;
+  }
 }

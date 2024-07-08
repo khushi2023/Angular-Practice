@@ -2,7 +2,7 @@
 import book from '../models/model.js'
 import dbConnect from '../db/index.js';
 
-const getBooks = async (req, res) => {
+const getAllBooks = async (req, res) => {
     try{
         await dbConnect();
     console.log("Get Books");
@@ -15,7 +15,7 @@ const getBooks = async (req, res) => {
     }
 }
 
-const addBooks = async (req, res) => {
+const addBook = async (req, res) => {
     try {
         await dbConnect();
 
@@ -47,4 +47,23 @@ const addBooks = async (req, res) => {
         res.status(500).json({ error: "Failed to add book." });
     }
 }
-export  {getBooks,addBooks};
+
+const getBook = async (req,res)=>{
+    try{
+        await dbConnect();
+        const name = req.body.name;
+        console.log(name);
+
+        const bookDetail = await book.findOne({name:name});
+        console.log(bookDetail);
+        if (!bookDetail) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+        res.json(bookDetail);
+    }
+    catch(err){
+        res.status(500).json({ message: 'Server error' });
+        console.log(err);
+    }
+}
+export  {getAllBooks,addBook,getBook};

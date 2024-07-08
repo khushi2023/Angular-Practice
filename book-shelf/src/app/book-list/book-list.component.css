@@ -1,0 +1,90 @@
+/* .container{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(166, 206, 218);
+    width: 100vw;
+    height: 100vh;
+  
+}
+.card {
+    margin: 20px;
+    width: 500px;
+    height: max-content;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+   */
+
+   .card {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+  
+.box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-group{
+  margin: 20px;
+}
+.ag-theme-acmecorp {
+  --ag-odd-row-background-color: #aaa;
+}
+.heading{
+  text-align: center;
+  margin: 20px;
+  color: #2d79f3;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+  

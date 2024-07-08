@@ -1,0 +1,38 @@
+.card {
+    margin: 20px;
+    width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+  .btn{
+    margin-right: 10px ;
+  }
+  
+  
