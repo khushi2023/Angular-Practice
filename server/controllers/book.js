@@ -51,10 +51,9 @@ const addBook = async (req, res) => {
 const getBook = async (req,res)=>{
     try{
         await dbConnect();
-        const name = req.body.name;
-        console.log(name);
-
-        const bookDetail = await book.findOne({name:name});
+        const _id = req.params.id;
+        console.log(_id);
+        const bookDetail = await book.findById(_id);
         console.log(bookDetail);
         if (!bookDetail) {
             return res.status(404).json({ message: 'Book not found' });

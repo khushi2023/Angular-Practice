@@ -20,6 +20,7 @@ export class BookListComponent implements OnInit {
   viewBooksInAgGrid: boolean = true;
   rowData: any[] = [];
   books:any;
+  edit:boolean = false;
   constructor(private router: Router,private bookService: BooksService ) { 
   }
   id: any;
@@ -38,7 +39,14 @@ export class BookListComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.bookListShow();
+  }
+
+  //display all books in ag-grid table
+  bookListShow(){
     this.bookService.getBookDetails().subscribe((data: any) => {
+      console.log(data);
+      
       this.books = data
       this.rowData = data.map((book: any, index: any) => ({
         id: index + 1,
@@ -51,7 +59,6 @@ export class BookListComponent implements OnInit {
       }))
     }) 
   }
-
   columnDefs: ColDef[] = [
     { headerName: 'ID', field: 'id' },
     { headerName: 'Name', field: 'name' },
@@ -59,17 +66,28 @@ export class BookListComponent implements OnInit {
     { headerName: 'desc', field: 'description' },
     { headerName: 'Price', field: 'price' },
     { headerName: 'Quantity', field: 'quantity' },
-    { headerName: 'Action', field: 'action', cellRenderer: (params:any)=>{
-      return `<button type="button" class="btn btn-primary">View</button>`
-    },onCellClicked:this.openBookDetails.bind(this)},
+    { headerName: 'Action', 
+      field: 'action', 
+      cellRenderer: (params:any)=>{
+        return `<button type="button" class="btn btn-primary" id="edit">Edit</button>
+        <button type="button" class="btn btn-success" id="view">View</button>
+        <button type="button" class="btn btn-danger" id="delete">Delete</button>`
+    }}
   ];
   openBookDetails(params:any) {
-    console.log(params.data)
-    const bookName = params.data.name;
-    console.log(bookName);
+    if(this.edit === true){
+      console.log("edit is true");
+      
+    }else{
+      console.log("edit is false");
+    }
+    console.log(params.data.action)
+    const bookId = params.data.action;
+    console.log(bookId);
     
     // this.bookService.setObj(book);
-    this.router.navigate(['bookDetail',{bookName:bookName}]);
+    //calling service to get particular book
+    // this.router.navigate(['bookDetail', bookId]);
   }
   OnGridReady(params: GridReadyEvent) {
 		this.gridApi = params.api;

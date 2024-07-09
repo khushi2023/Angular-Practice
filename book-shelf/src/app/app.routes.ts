@@ -16,7 +16,7 @@ export const routes: Routes = [
         path:'addBooks', component: AddBooksComponent
     },
     {
-        path:'bookDetail', component: BookDetailsComponent
+        path:'bookDetail/:bookId', component: BookDetailsComponent
     }
 ];
 
