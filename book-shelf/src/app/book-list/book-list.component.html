@@ -1,22 +1,15 @@
-<h1 class="heading">Book Shelf</h1>
+<app-navbar></app-navbar>
 <div class="box">
 <div class="btn-group" role="group" aria-label="View Options">
 	<button type="button" class="btn btn-primaryy" (click)="viewCards()" [class.active]="viewBooksInAgGrid">View in Cards</button>
 	<button type="button" class="btn btn-primary" (click)="agGrid()" [class.active]="!viewBooksInAgGrid">View in ag-Grid</button>
   </div>
   <div>
+	<button type="button" class="btn btn-primary" style="margin-right: 10px;" (click)="addBook()">Add Book</button>
   <input type="search" name="bookByName" id="bookByName" placeholder="Search" (input)="onSearch()"><label for="bookByName">Search</label>
 </div>
 </div>
-<div id="myGrid" class="ag-theme-quartz ag-theme-acmecorp">
-  <ag-grid-angular *ngIf="viewBooksInAgGrid"
-class="ag-theme-alpine"
-style="height: 500px; width: 100%;"
-	[rowData]="rowData"
-	[columnDefs]="columnDefs"
-	(gridReady)="OnGridReady($event)">
-</ag-grid-angular>
-</div>
+<!-- Cards view -->
 <div class="container" *ngIf="!viewBooksInAgGrid">
 	<div class="row">
 	  <div class="col-md-3 md-flex" *ngFor="let book of books">
@@ -28,11 +21,21 @@ style="height: 500px; width: 100%;"
 			<p class="card-text">{{ book.description }}</p>
 			<p class="card-text"><strong>Quantity:</strong> {{ book.quantity }}</p>
 			<p class="card-text"><strong>Price:</strong> ${{ book.price }}</p>
-			
 			<button  class="btn btn-primary" (click)="openBookDetails(book._id)">View</button>
 		  </div>
 		</div>
 	  </div>
 	</div>
+  </div>
+
+  <!-- ag-grid View -->
+  <div id="myGrid" class="ag-theme-quartz ag-theme-acmecorp">
+	<ag-grid-angular *ngIf="viewBooksInAgGrid"
+  class="ag-theme-alpine"
+  style="height: 500px; width: 100%;"
+	  [rowData]="rowData"
+	  [columnDefs]="columnDefs"
+	  (gridReady)="OnGridReady($event)">
+  </ag-grid-angular>
   </div>
   

@@ -31,7 +31,7 @@ export class BooksService {
     )
   }
   getParticularBook(id:any):Observable<any>{
-    return this.http.get<any>(`${this.url}getBook/${id}`,id).pipe(
+    return this.http.get<any>(`${this.url}getBook/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
         return throwError(()=> error);
@@ -42,8 +42,24 @@ export class BooksService {
     this.bookData = obj;
     console.log(this.bookData);
   }
-  getObj(){
-    console.log(this.bookData);
-    return this.bookData;
+  deleteBook(id:any):Observable<any>{
+    console.log(id);
+    
+    return this.http.delete<any>(`${this.url}deleteBook/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        return throwError(()=> error);
+      })
+    )
+    
+  }
+
+  private isnewBook: boolean = true;
+  getnewBookFlag():boolean{
+    console.log(this.isnewBook);
+    return this.isnewBook;
+  }
+  setnewBookFlag(flag:boolean):void{
+    this.isnewBook = flag;
   }
 }

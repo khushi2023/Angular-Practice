@@ -13,6 +13,9 @@ export const routes: Routes = [
         path: 'viewBooks',component: BookListComponent
     },
     {
+        path:'editBook/:bookId', component: AddBooksComponent
+    },
+    {
         path:'addBooks', component: AddBooksComponent
     },
     {

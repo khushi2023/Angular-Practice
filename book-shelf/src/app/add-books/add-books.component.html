@@ -33,7 +33,6 @@
             Please enter price of minimum 1
         </div>
     </div>
-
     <div class="form-field">
         <label for="quantity">Quantity  <span style="color: red;">*</span></label>
         <input type="number" formControlName="quantity" min="1">
@@ -41,6 +40,7 @@
             Please enter quantity of minimum 1
         </div>
     </div>
+    <button type="submit" class="btn" [disabled]="!bookForm.valid" >{{button}}</button>
+    <!-- <button type="submit" class="btn" [disabled]="!bookForm.valid" >Update</button> -->
 
-    <button type="submit" class="btn" [disabled]="!bookForm.valid">Submit</button>
 </form>
