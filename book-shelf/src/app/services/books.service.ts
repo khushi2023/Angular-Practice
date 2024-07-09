@@ -21,7 +21,6 @@ export class BooksService {
       })
     );
   }
-  
 
   getBookDetails():Observable<void>{
     return this.http.get<void>(`${this.url}getAllBooks`).pipe(

@@ -69,25 +69,16 @@ export class BookListComponent implements OnInit {
     { headerName: 'Action', 
       field: 'action', 
       cellRenderer: (params:any)=>{
-        return `<button type="button" class="btn btn-primary" id="edit" >Edit</button>
-        <button type="button" class="btn btn-success" id="view">View</button>
-        <button type="button" class="btn btn-danger" id="delete">Delete</button>`
+        return `<button type="button" class="btn btn-primary" id="edit">View</button>`
     },onCellClicked:this.openBookDetails.bind(this)},
   ];
   openBookDetails(params:any) {
-    if(this.edit === true){
-      console.log("edit is true");
-      
-    }else{
-      console.log("edit is false");
-    }
     console.log(params.data.action)
     const bookId = params.data.action;
     console.log(bookId);
     
-    // this.bookService.setObj(book);
     //calling service to get particular book
-    // this.router.navigate(['bookDetail', bookId]);
+    this.router.navigate(['bookDetail', bookId]);
   }
   OnGridReady(params: GridReadyEvent) {
 		this.gridApi = params.api;

@@ -51,7 +51,7 @@ const addBook = async (req, res) => {
 const getBook = async (req,res)=>{
     try{
         await dbConnect();
-        const _id = req.params.id;
+        const _id = await req.params.id;
         console.log(_id);
         const bookDetail = await book.findById(_id);
         console.log(bookDetail);
