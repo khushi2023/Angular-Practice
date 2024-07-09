@@ -4,6 +4,7 @@ import { AddBooksComponent } from './add-books/add-books.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,9 @@ export const routes: Routes = [
     },
     {
         path:'bookDetail/:bookId', component: BookDetailsComponent
+    },
+    {
+        path: 'cart' , component: CartComponent
     }
 ];
 

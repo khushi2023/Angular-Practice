@@ -1,0 +1,9 @@
+<p>cart works!</p>
+<div *ngIf="cartBooks">
+<div *ngFor="let book of cartBooks">
+    {{ book.name }}
+    {{ book.price }}
+    {{ book.author }}
+    {{ book.description }}
+</div>
+</div>

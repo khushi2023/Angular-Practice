@@ -38,10 +38,19 @@ export class BooksService {
       })      
     )
   }
-  setObj(obj:any){
+
+  //adding book in cart
+  addToCart(obj:any){
     this.bookData = obj;
     console.log(this.bookData);
   }
+
+  //getting cart data
+  getCartData(){
+    return this.bookData;
+  }
+
+  //delete book
   deleteBook(id:any):Observable<any>{
     console.log(id);
     
@@ -52,14 +61,5 @@ export class BooksService {
       })
     )
     
-  }
-
-  private isnewBook: boolean = true;
-  getnewBookFlag():boolean{
-    console.log(this.isnewBook);
-    return this.isnewBook;
-  }
-  setnewBookFlag(flag:boolean):void{
-    this.isnewBook = flag;
   }
 }

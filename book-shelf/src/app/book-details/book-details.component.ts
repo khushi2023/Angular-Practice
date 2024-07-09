@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from '../services/books.service';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class BookDetailsComponent implements OnInit {
   bookId:any;
   public book!:any;
-  constructor(private activatedRoute: ActivatedRoute, private bookService: BooksService) { }
+  constructor(private router: Router,private activatedRoute: ActivatedRoute, private bookService: BooksService) { }
   
   //service to call an api based on id toget particular book
   public getBook(){
@@ -29,5 +29,10 @@ export class BookDetailsComponent implements OnInit {
     this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
     console.log(this.bookId);
    this.getBook();
+  }
+  addToCart(){
+    this.bookService.addToCart(this.book);
+    console.log("Added to cart");
+    this.router.navigate(['cart']);
   }
 }
