@@ -69,10 +69,10 @@ export class BookListComponent implements OnInit {
     { headerName: 'Action', 
       field: 'action', 
       cellRenderer: (params:any)=>{
-        return `<button type="button" class="btn btn-primary" id="edit">Edit</button>
+        return `<button type="button" class="btn btn-primary" id="edit" >Edit</button>
         <button type="button" class="btn btn-success" id="view">View</button>
         <button type="button" class="btn btn-danger" id="delete">Delete</button>`
-    }}
+    },onCellClicked:this.openBookDetails.bind(this)},
   ];
   openBookDetails(params:any) {
     if(this.edit === true){
