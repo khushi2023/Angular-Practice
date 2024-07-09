@@ -38,9 +38,6 @@ export class BookListComponent implements OnInit {
       (document.getElementById("bookByName") as HTMLInputElement).value,
     );
   }
-  ngOnInit(): void {
-    this.bookListShow();
-  }
 
   //display all books in ag-grid table
   bookListShow(){
@@ -70,13 +67,13 @@ export class BookListComponent implements OnInit {
       field: 'action', 
       cellRenderer: (params:any)=>{
         return `<button type="button" class="btn btn-primary" id="edit">View</button>`
-    },onCellClicked:this.openBookDetails.bind(this)},
+    },
+      onCellClicked:this.openBookDetails.bind(this)},
   ];
   openBookDetails(params:any) {
-    console.log(params.data.action)
-    const bookId = params.data.action;
-    console.log(bookId);
-    
+    console.log(params);    
+    const bookId = typeof params === 'string' ? params: params.data.action;
+
     //calling service to get particular book
     this.router.navigate(['bookDetail', bookId]);
   }
@@ -88,5 +85,9 @@ export class BookListComponent implements OnInit {
     flex: 1,
     minWidth: 100,
   };
+
+  ngOnInit(): void {
+    this.bookListShow();
+  }
 }
 

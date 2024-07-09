@@ -28,7 +28,8 @@ style="height: 500px; width: 100%;"
 			<p class="card-text">{{ book.description }}</p>
 			<p class="card-text"><strong>Quantity:</strong> {{ book.quantity }}</p>
 			<p class="card-text"><strong>Price:</strong> ${{ book.price }}</p>
-			<a href="#" class="btn btn-primary">View</a>
+			
+			<button  class="btn btn-primary" (click)="openBookDetails(book._id)">View</button>
 		  </div>
 		</div>
 	  </div>

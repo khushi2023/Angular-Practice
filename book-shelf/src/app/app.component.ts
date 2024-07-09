@@ -12,8 +12,5 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'book-shelf';
-  // firestore: Firestore = inject(Firestore);
-  // constructor() {
-  //   const itemCollection = collection(this.firestore, 'BookList');
-  // }
+
 }
