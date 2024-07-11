@@ -13,10 +13,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AddBooksComponent implements OnInit{
   button:any;
-  isnewBook!: boolean;
   bookId: any;
   ngOnInit(): void {
-    this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
+    this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');  
     this.initForm();
     if(this.router.url.startsWith("/editBook")){
       this.button = "Update";
@@ -41,17 +40,26 @@ export class AddBooksComponent implements OnInit{
       quantity: ['',[Validators.required,Validators.min(1)]],
     });    
   }          
-  //on submiting
+  //on submiting form
   onSubmit():void {
-    console.log(this.bookForm.value);
-    this.bookService.addBookDetails(this.bookForm.value).subscribe((res)=>{
-      console.log(res);
-      
-      this.toastr.success('Book added successfully');
-    },(err)=>{
-      console.log(err);
-    })
+    if(this.button == "Update"){
+      console.log(this.bookForm.value);
+      this.bookService.updateBook(this.bookId,this.bookForm.value).subscribe((res)=>{
+        console.log(res);
+        this.toastr.success('Book updated successfully');
+      },(err)=>{
+        console.log(err);
+      })
+    }else{
+      this.bookService.addBookDetails(this.bookForm.value).subscribe((res)=>{
+        console.log(res);
+        
+        this.toastr.success('Book added successfully');
+      },(err)=>{
+        console.log(err);
+      })
     this.router.navigate(['viewBooks']);
 
   }
+}
 }

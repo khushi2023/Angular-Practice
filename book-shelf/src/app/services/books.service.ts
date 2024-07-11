@@ -60,6 +60,15 @@ export class BooksService {
         return throwError(()=> error);
       })
     )
-    
+  }
+
+  //update book
+  updateBook(id:any, obj:any):Observable<any>{
+    return this.http.put<any>(`${this.url}updateBook/${id}`, obj).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        return throwError(()=> error);
+      })
+    )
   }
 }

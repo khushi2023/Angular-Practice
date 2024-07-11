@@ -149,7 +149,7 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['addBooks']);
   }
   ngOnInit(): void {
-    this.bookListShow();
+        this.bookListShow();
   }
 }
 
