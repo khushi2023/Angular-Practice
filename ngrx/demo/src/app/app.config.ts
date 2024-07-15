@@ -7,7 +7,7 @@ import { counterReducer } from '../store/reducers/counter';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),Store,
-    provideStore({count: counterReducer}),
+  //   provideStore({count: counterReducer}),
     // StoreModule.forRoot({count: counterReducer})
   ]
 };

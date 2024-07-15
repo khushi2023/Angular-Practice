@@ -1,7 +1,8 @@
 // Reducers are pure functions that take the current state and an action and return a new state. They are responsible for handling the state changes in your application.
 import { createReducer, on } from "@ngrx/store";
 import { Todo } from "../todo.model";
-import * as TodoActions from './actions';
+// import * as TodoActions from './actions';
+import { loadTodos, loadTodosSuccess, loadTodosFailure, addTodo, updateTodo, deleteTodo } from "./actions";
 export interface TodoState {
     todos: Todo[];
     loading: boolean;
@@ -17,15 +18,15 @@ export const initialState: TodoState = {
 export const todoReducer = createReducer(
     initialState,
     
-    on(TodoActions.loadTodos, state => ({ ...state, loading: true })),
+    on(loadTodos, state => ({ ...state, loading: true })),
     
-    on(TodoActions.loadTodosSuccess, (state, { todos }) =>({ ...state, todos, loading: false })),
+    on(loadTodosSuccess, (state, { todos }) =>({ ...state, todos, loading: false })),
     
-    on(TodoActions.loadTodosFailure, (state, { error }) => ({ ...state, error, loading: false })),
+    on(loadTodosFailure, (state, { error }) => ({ ...state, error, loading: false })),
     
-    on(TodoActions.addTodo, (state, { todo }) => ({ ...state, todos: [...state.todos, todo] })),
+    on(addTodo, (state, { todo }) => ({ ...state, todos: [...state.todos, todo] })),
     
-    on(TodoActions.updateTodo, (state, { todo }) => ({ ...state, todos: state.todos.map(t => t.id === todo.id ? todo : t) })),
+    on(updateTodo, (state, { todo }) => ({ ...state, todos: state.todos.map(t => t.id === todo.id ? todo : t) })),
     
-    on(TodoActions.deleteTodo, (state, { id }) => ({ ...state, todos: state.todos.filter(t => t.id !== id) })),
+    on(deleteTodo, (state, { id }) => ({ ...state, todos: state.todos.filter(t => t.id !== id) })),
     );

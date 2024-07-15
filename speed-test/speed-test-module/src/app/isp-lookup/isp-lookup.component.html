@@ -1,0 +1,6 @@
+<div>
+    <p *ngIf="publicIP">Public IP Address: {{ publicIP }}</p>
+    <p *ngIf="ispInfo">ISP: {{ ispInfo }}</p>
+    <button (click)="lookupISP()">Lookup ISP</button>
+  </div>
+  

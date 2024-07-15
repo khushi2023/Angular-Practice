@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Todo } from '../todo.model';
 import { AppState, AppStore } from '../store/store';
 import { Store } from '@ngrx/store';
+import { loadTodos, addTodo, updateTodo } from '../store/actions';
 
 @Component({
   selector: 'app-todo-list',
@@ -23,16 +24,22 @@ export class TodoListComponent {
   }
 
   loadTodos() {
-    this.data.dispatch(TodoActions.loadTodos());
+    console.log(this.todos$);
+    
+    this.data.dispatch(loadTodos());
+    console.log(this.todos$);
+    
   }
 
   addTodo(index: number) {
-
+    console.log(index);
     const todo: Todo = {id: index, description: 'New Todo', completed: false };
-    this.store.dispatch(TodoActions.addTodo({ todo }));
+    console.log(todo);
+    
+    this.store.dispatch(addTodo({ todo }));
     }
     
-    complete(todo: Todo) {
-      this.store.dispatch(TodoActions.updateTodo({todo : {...todo, completed: true}}));
-    }
+  complete(todo: Todo) {
+    this.store.dispatch(updateTodo({todo : {...todo, completed: true}}));
+  }
 }

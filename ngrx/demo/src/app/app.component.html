@@ -1,4 +1,6 @@
-<div>Current Count: {{ count$}}</div>
+<!-- <div>Current Count: {{ count$}}</div>
 <button (click)="increment()">+</button>
 <button (click)="decrement()">-</button>
-<button (click)="reset()">Reset Counter</button>
+<button (click)="reset()">Reset Counter</button> -->
+
+<input type="text" [value]=title (keyup.enter)="changeTitle(getInputValue($event))">

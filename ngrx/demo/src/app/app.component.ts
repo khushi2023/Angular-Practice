@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+// import { Store, select } from '@ngrx/store';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +12,26 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'demo';
-  count$!:Observable<number>;
-  constructor(private store: Store<{count: number}>) {
-    // this.count$ = store.pipe(select('count'))
-    this.count$ = this.store.select(state => state.count)
+  changeTitle(newTitle: string) {
+    this.title = newTitle
   }
-  increment(){
-    this.store.dispatch({type: 'INCREMENT'})
+  getInputValue(event: Event) {
+    console.log('event', event);
+    return (event.target as HTMLInputElement).value;
+    
   }
-  decrement(){
-    this.store.dispatch({type: 'DECREMENT'})
-  }
-  reset(){
-    this.store.dispatch({type: 'RESET'})
-  }
+  // count$!:Observable<number>;
+  // constructor(private store: Store<{count: number}>) {
+  //   // this.count$ = store.pipe(select('count'))
+  //   this.count$ = this.store.select(state => state.count)
+  // }
+  // increment(){
+  //   this.store.dispatch({type: 'INCREMENT'})
+  // }
+  // decrement(){
+  //   this.store.dispatch({type: 'DECREMENT'})
+  // }
+  // reset(){
+  //   this.store.dispatch({type: 'RESET'})
+  // }
 }
