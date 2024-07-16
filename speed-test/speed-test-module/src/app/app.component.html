@@ -1,1 +1,8 @@
+<!-- <div *ngIf="isPoorConnection" class="warning-message">
+    Your internet connection seems to be poor. You might experience slower performance.
+  </div> -->
+  <div *ngIf="warningMessage" class="warning-message">
+    {{ warningMessage }}
+  </div>
+  
 <app-isp-lookup></app-isp-lookup>

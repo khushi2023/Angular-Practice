@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class IspLookupComponent implements OnInit {
   publicIP: string | null = null;
+  data:any;
   ispInfo: any;
 
   constructor(private ispLookupService: IspLookupService) {}
@@ -21,9 +22,14 @@ export class IspLookupComponent implements OnInit {
 
   lookupISP() {
     this.ispLookupService.lookupISP().subscribe(data => {
+      console.log(data);
+      this.data = data;
       this.publicIP = data.ip;
       this.ispInfo = data.isp || data.org; // Display ISP or Org information
     });
     console.log(this.ispInfo);
+    console.log(this.data);
+    
+    
   }
 }

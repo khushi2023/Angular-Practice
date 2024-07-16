@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
       const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
       console.log(connection);
       
-      if (connection.effectiveType === '2g' || connection.downlink > 1) {
+      if (connection.effectiveType < '3g' || connection.downlink < 1) {
         this.isPoorConnection = true;
       } else {
         this.isPoorConnection = false;

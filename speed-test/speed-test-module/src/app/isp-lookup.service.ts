@@ -1,13 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, of, switchMap, tap } from 'rxjs';
+import { Injectable, NgZone } from '@angular/core';
+import { Observable, Subject, of, switchMap, tap } from 'rxjs';
+// import {SpeedTestService} from 'ng-speed-test';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IspLookupService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ngZone: NgZone) {
+    if (this.connection) {
+      this.connection.addEventListener('change', this.updateConnectionStatus.bind(this));
+      this.updateConnectionStatus(); // Initialize with the current connection status
+    }
+    // this.speedTestService.getMbps().subscribe(
+    //   (speed) => {
+    //     console.log('Your speed is ' + speed);
+    //   }
+    // );
+  }
   private ipApiUrl = 'https://api.ipify.org?format=json'; // Public IP API
   private ipInfoUrl = 'https://ipinfo.io/{ip}/json';      // ISP Information API
   private ipGeoUrl = 'https://api.ipgeolocation.io/ipgeo?apiKey=87a823272881430280db3f676d356933&ip={ip}'; // IP Geolocation API
@@ -48,5 +59,19 @@ private cachedISPInfo: any = null;
         })
       );
     }
+  }
+
+  /////
+  private connection: any = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+  private speedSubject = new Subject<string>();
+
+  private updateConnectionStatus() {
+    this.ngZone.run(() => {
+      this.speedSubject.next(this.connection.effectiveType);
+    });
+  }
+
+  getNetworkSpeed() {
+    return this.speedSubject.asObservable();
   }
 }
