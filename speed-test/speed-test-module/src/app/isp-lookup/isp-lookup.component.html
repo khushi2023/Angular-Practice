@@ -3,4 +3,9 @@
     <p *ngIf="ispInfo">ISP: {{ ispInfo }}</p>
     <button (click)="lookupISP()">Lookup ISP</button>
   </div>
+
+  <div>
+    <h2>Speed Test Result</h2>
+    <pre>{{ speedTestResult | json }}</pre>
+  </div>
   

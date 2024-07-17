@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "fast-speedtest-api": "^0.3.2",
     "ng-speed-test": "^2.6.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

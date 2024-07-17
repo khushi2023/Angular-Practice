@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IspLookupService } from '../isp-lookup.service';
 import { CommonModule } from '@angular/common';
-
+import { SpeedTestService } from '../speed-test.service';
+import { SpeedTestModule } from 'ng-speed-test';
 @Component({
   selector: 'app-isp-lookup',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SpeedTestModule],
   templateUrl: './isp-lookup.component.html',
   styleUrl: './isp-lookup.component.css'
 })
@@ -13,8 +14,9 @@ export class IspLookupComponent implements OnInit {
   publicIP: string | null = null;
   data:any;
   ispInfo: any;
+  public speedTestResult:any;
 
-  constructor(private ispLookupService: IspLookupService) {}
+  constructor(private ispLookupService: IspLookupService, private speedTestService: SpeedTestService) {}
 
   ngOnInit() {
     this.lookupISP();
@@ -29,7 +31,18 @@ export class IspLookupComponent implements OnInit {
     });
     console.log(this.ispInfo);
     console.log(this.data);
-    
-    
+    this.getSpeedTestResult();
   }
+
+  getSpeedTestResult() {
+    this.speedTestService.getSpeedTest().subscribe(data => {
+      console.log(data);
+      this.speedTestResult = data;
+      console.log(this.speedTestResult);      
+    },
+  (err)=>{
+    console.error(err); 
+  })
+
+}
 }
