@@ -9,22 +9,27 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 app.use(cors());
-// app.use(express.static(__dirname + '/public'));
 
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/public/index.html');
-// });
-
-let packetCounter = 0;
+let packetLatencies={};
+let receivedPackets = 0;
 let ackCounter = 0;
-
+let clientSendTime;
+let latency;
+let latencySum=0;
 wss.on('connection', (ws) => {
     ws.on('message', (message) => {
+        const serverReceiveTime = new Date().getTime();
         const packet = JSON.parse(message);
-        const serverReceiveTime = performanceNow();
-        console.log(`Received packet with ID: ${packet.id}`);
+        console.log(packet);
+        if(packet.sendTime){
+            const latency = serverReceiveTime - packet.sendTime;
+            console.log(`Latency: ${latency} ms`);
+            latencySum+=latency;
+            packetLatencies[packet.id] = latency;
+        }
         
-        const serverResponseTime = performanceNow();
+        console.log(`Received packet with ID: ${packet.id}`);
+        const serverResponseTime = new Date().getTime();
         ws.send(JSON.stringify({
             id: packet.id,
             clientSendTime: packet.sendTime,
@@ -32,7 +37,7 @@ wss.on('connection', (ws) => {
             serverResponseTime
         }));
     });
-
+    console.log(latencySum);
     ws.on('message', (message) => {
         const ack = JSON.parse(message);
         ackCounter++;

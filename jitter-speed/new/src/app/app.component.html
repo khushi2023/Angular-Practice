@@ -1,1 +1,37 @@
-<h1>Khushiiii</h1>
+<div class="container">
+    <h1>Speed Test Module</h1>
+    <div *ngIf="loading" class="loading">
+        <div class="loading-bar">
+          <div class="progress" [style.width.%]="progress"></div>
+        </div>
+        <p>Sending packets... {{ progress | number: '1.0-0' }}%</p>
+      </div>
+    <ul *ngIf="!loading">
+        <li *ngIf="jitter !== null">Jitter: {{ jitter }} ms</li>
+        <li>RTT: {{ avgLatency }} ms</li>
+        <li>Packets sent: {{ sentPackets}}</li>
+        <li>Acknowledgements received: {{ receivedAcks }}</li>
+        <li>Packet loss: {{ packetLoss }}%</li>
+    </ul>
+    <div class="packet-details">
+        <h2>Packet Details</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Send Time</th>
+                    <th>Receive Time</th>
+                    <th>Round Trip Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let msg of packetTimes">
+                    <td>{{ msg.id }}</td>
+                    <td>{{ msg.sendTime}} ms</td>
+                    <td>{{ msg.receiveTime ? (msg.receiveTime) + ' ms' : 'Pending' }}</td>
+                    <td>{{ msg.roundTripTime !== undefined ? msg.roundTripTime + ' ms' : 'Pending' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
