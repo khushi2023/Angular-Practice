@@ -1,0 +1,8 @@
+<md-editor name="Content" 
+  [(ngModel)]="content" 
+  [height]="'800px'" 
+  required 
+  maxlength="500">
+  <slot custom-btns></slot>
+</md-editor>
+<button (click)="generatePDF()">Generate PDF</button>
